@@ -2,8 +2,11 @@
   "name": "logviewer",
   "version": "0.0.1",
   "dependencies": {
-    "angular": "~1.2.0-rc3",
-    "socket.io": "~1.0.0",
-    "socket.io-client": "~1.0.0"
+    "angular": "~1.2.0-rc.3",
+    "angular-route": "~1.2.0-rc.3",
+    "socket.io": "~0.9.15",
+    "bootstrap": "~3.0.0",
+    "jquery": "~1.10.1",
+    "socket.io-client": "~0.9.16"
   }
 }
