@@ -31,15 +31,20 @@ logfiles.forEach(function(log) {
 
 	io.of('/' + log.id).on('connection', function(client){
 
-		fs.readFile(log.url, 'utf-8', function(err, data) {
-		    if (err) throw err;
+		client.on('init', function(data) {
 
-		    var lines = data.trim().split('\n');
-		    var lastLines = lines.slice(-100);
+			console.log('Initialization');
+			
+			fs.readFile(log.url, 'utf-8', function(err, data) {
+			    if (err) throw err;
 
-		    lastLines.forEach( function(line) {
-		    	client.emit('Log', line);
-		    });
+			    var lines = data.trim().split('\n');
+			    var lastLines = lines.slice(-100);
+
+			    lastLines.forEach( function(line) {
+			    	client.emit('Log', line);
+			    });
+			});
 		});
 
 

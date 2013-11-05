@@ -31,9 +31,6 @@ pocazApp.factory('socket', function ($rootScope) {
                   callback.apply(socket, args);
                 });
               }
-              else {
-                callback.apply(socket, args);
-              }
             });
           },
           emit: function (eventName, data, callback) {
@@ -84,12 +81,15 @@ pocazApp.controller('pocazCtrl', function(LogsService, socket, $scope){
 
       $scope.sock = socket.giveSocket();
       $scope.sock.connect($scope.selectedLog);
+
       $scope.sock.on('Log', function(result) {
-          $scope.msg.push(result);
-          if($scope.msg.length > 100) {
-              $scope.msg.shift();
-          }
+        $scope.msg.push(result);
+        if($scope.msg.length > 100) {
+            $scope.msg.shift();
+        }
       });
+
+      $scope.sock.emit('init');
 
     }
 
