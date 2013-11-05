@@ -2,7 +2,16 @@
  * Created by bennekroufm on 19/10/13.
  */
 
-var pocazApp = angular.module('pocaz', ['luegg.directives']);
+var pocazApp = angular.module('pocaz', ['luegg.directives', 'ngResource']);
+
+pocazApp.factory('LogsService', ['$resource',
+  function($resource){
+
+    return $resource('/logs.json', {}, {
+      query: {method:'GET', isArray:'true'}
+    });
+  }
+]);
 
 pocazApp.factory('socket', function ($rootScope) {
   return {
@@ -48,43 +57,31 @@ pocazApp.factory('socket', function ($rootScope) {
 });
 
 
-pocazApp.controller('pocazCtrl', function(socket, $scope){
+pocazApp.controller('pocazCtrl', function(LogsService, socket, $scope){
 
     $scope.msg = [];
-    $scope.selectedLog = 1;
+    $scope.selectedLog = 0;
     $scope.glued = true;
-
     $scope.logs = [];
-    $scope.logs[0] = {
-      id: 1,
-      css: 'active'
-    };
 
-    $scope.logs[1] = {
-      id: 2,
-      css: ''
-    };
-
-    $scope.sock = socket.giveSocket();
-    $scope.sock.connect($scope.selectedLog);
-    $scope.sock.on('Log', function(result) {
-        $scope.msg.push(result);
-        if($scope.msg.length > 100) {
-            $scope.msg.shift();
-        }
+    LogsService.query({}, function(data) {
+      $scope.logs = data;
     });
 
-    $scope.changeLog = function(log) {
-      $scope.sock.disconnect();
+    $scope.sock = null;
 
-      $scope.msg = [];
-      $scope.logs.forEach(function(log) {
-        log.css = '';
-      });
+    $scope.changeLog = function(log) {
+      if ($scope.sock != null) {
+        $scope.sock.disconnect();
+
+        $scope.msg = [];
+        $scope.logs.forEach(function(log) {
+          log.css = '';
+        });
+      }
       $scope.selectedLog = log.id;
       log.css = 'active';
-      
-      $scope.sock.disconnect();
+
       $scope.sock = socket.giveSocket();
       $scope.sock.connect($scope.selectedLog);
       $scope.sock.on('Log', function(result) {

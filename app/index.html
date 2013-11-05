@@ -9,6 +9,7 @@
 
     <script src="vendor/angular/angular.min.js"></script>
     <script src="vendor/angular-route/angular-route.min.js"></script>
+    <script src="vendor/angular-resource/angular-resource.min.js"></script>
     <script src="scripts/scrollglue.js"></script>
     <script src="vendor/socket.io-client/dist/socket.io.js"></script>
 
@@ -26,7 +27,7 @@
         <button ng-click="glued = !glued" class="btn btn-default" ng-show="!glued">Scroll automatique Off</button>
         <p></p>
         <ul class="nav nav-pills nav-stacked">
-            <li ng-repeat="log in logs" ng-click="changeLog(log)" class="{{log.css}}"><a>Flux poussee</a></li>
+            <li ng-repeat="log in logs" ng-click="changeLog(log)" class="{{log.css}}"><a>{{log.name}}</a></li>
         </ul>
     </div>
     <div class="col-md-10">
