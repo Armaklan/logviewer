@@ -1,0 +1,17 @@
+var logfiles = [];
+
+logfiles[0] = {
+	name: "fluxpousse",
+	id: 0,
+	url : "c:\\developpement\\test.log",
+	css : ""
+};
+
+logfiles[1] = {
+	name: "ErrLog",
+	id: 1,
+	url : "c:\\developpement\\err.log",
+	css : ""
+};
+
+module.exports.logfiles = logfiles;

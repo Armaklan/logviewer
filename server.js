@@ -8,38 +8,23 @@ var app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
-var logfiles = [];
 var tail = [];
 
-logfiles[0] = {
-	name: "fluxpousse",
-	id: 0,
-	url : "c:\\developpement\\test.log",
-	css : ""
-};
-logfiles[1] = {
-	name: "ErrLog",
-	id: 1,
-	url : "c:\\developpement\\err.log",
-	css : ""
-};
+var logModule = require('./conf.js');
+var logfiles = logModule.logfiles;
 
 Tail = require('tail').Tail;
-
-
 
 app.configure(function() {
     app.use(express.static(__dirname + '/app'));
     app.use(express.errorHandler({ dumpExceptions: true, showStack: false }));
 });
 
-
 server.listen(7000);
 
 app.get('/logs.json', function(req, res){
   res.send(logfiles);
 });
-
 
 logfiles.forEach(function(log) {
 	tail[log.id] = new Tail(log.url);
