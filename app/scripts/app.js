@@ -1,10 +1,14 @@
 /**
- * Created by bennekroufm on 19/10/13.
+ * Application angular qui permet d'afficher la page et de connecter les websockets.
+ * 
+ * @author ZUBER Lionel <lionel.zuber@armaklan.org>
+ * @version 0.1
+ * @license MIT
  */
 
-var pocazApp = angular.module('pocaz', ['luegg.directives', 'ngResource']);
+var logApp = angular.module('logApp', ['luegg.directives', 'ngResource']);
 
-pocazApp.factory('LogsService', ['$resource',
+logApp.factory('LogsService', ['$resource',
   function($resource){
 
     return $resource('/logs.json', {}, {
@@ -13,7 +17,7 @@ pocazApp.factory('LogsService', ['$resource',
   }
 ]);
 
-pocazApp.factory('socket', function ($rootScope) {
+logApp.factory('socket', function ($rootScope) {
   return {
     giveSocket: function() {
         var disconnecting = false;
@@ -54,7 +58,7 @@ pocazApp.factory('socket', function ($rootScope) {
 });
 
 
-pocazApp.controller('pocazCtrl', function(LogsService, socket, $scope){
+logApp.controller('logAppCtrl', function(LogsService, socket, $scope){
 
     $scope.msg = [];
     $scope.selectedLog = 0;

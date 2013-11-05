@@ -1,3 +1,13 @@
+/**
+ * Fichier de configuration des logs.
+ * 
+ * Conserver le format en l'état, sinon l'application ne fonctionnera pas.
+ * Remplisser le id avec un identifiant unique pour chaque lignes.
+ * @author ZUBER Lionel <lionel.zuber@armaklan.org>
+ * @version 0.1
+ * @license MIT
+ */
+ 
 var logfiles = [];
 
 logfiles[0] = {

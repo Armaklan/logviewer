@@ -1,6 +1,12 @@
 /**
- * Created by bennekroufm on 19/10/13.
+ * Configuration node.js pour exposer :
+ * 	- La page Web et ses ressources
+ *  - Le service WebSocket de suivi des logs
+ * @author ZUBER Lionel <lionel.zuber@armaklan.org>
+ * @version 0.1
+ * @license MIT
  */
+
 var express = require('express')
     , http = require('http');
 var fs = require('fs'); // file system module
