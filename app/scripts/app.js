@@ -62,7 +62,7 @@ logApp.controller('logAppCtrl', function(LogsService, socket, $scope){
 
     $scope.query = "";
     $scope.msg = [];
-    $scope.selectedLog = 0;
+    $scope.selectedLog = -1;
     $scope.glued = true;
     $scope.logs = [];
 

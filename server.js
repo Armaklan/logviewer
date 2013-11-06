@@ -35,6 +35,17 @@ app.get('/logs.json', function(req, res){
 logfiles.forEach(function(log) {
 	tail[log.id] = new Tail(log.url);
 
+	app.get('/file/' + log.id, function(req, res) {
+		var stat = fs.statSync(log.url);
+		res.writeHead(200, {
+			  'Content-Type': 'application/octet-stream', 
+		      'Content-Length': stat.size,
+		      'Content-disposition' : 'attachment; filename="' + log.name + '.log"'
+		});
+		var stream = fs.createReadStream(log.url, { bufferSize: 64 * 1024 });
+		stream.pipe(res);
+	});
+
 	io.of('/' + log.id).on('connection', function(client){
 
 		client.on('init', function(data) {
@@ -51,6 +62,7 @@ logfiles.forEach(function(log) {
 			    	client.emit('Log', line);
 			    });
 			});
+
 		});
 
 

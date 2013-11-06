@@ -32,6 +32,10 @@
                 <p></p>
                 <button ng-click="glued = !glued" class="btn btn-default form-control" ng-show="glued">Scroll ON</button>
                 <button ng-click="glued = !glued" class="btn btn-default form-control" ng-show="!glued">Scroll Off</button>
+                <p></p>
+                <div ng-show="selectedLog >= 0">
+                    <a href="file/{{selectedLog}}" class="btn btn-primary form-control">Télécharger</a>
+                </div>
             </div>
         </div>
         <div class="panel well">
