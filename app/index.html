@@ -22,19 +22,35 @@
 <body>
 <div class="container" ng-app="logApp" ng-controller="logAppCtrl">
     <div class="row">
-    <div class="col-md-2" style="margin-top: 60px">
-        <button ng-click="glued = !glued" class="btn btn-default" ng-show="glued">Scroll automatique ON</button>
-        <button ng-click="glued = !glued" class="btn btn-default" ng-show="!glued">Scroll automatique Off</button>
-        <p></p>
-        <ul class="nav nav-pills nav-stacked">
-            <li ng-repeat="log in logs" ng-click="changeLog(log)" class="{{log.css}}"><a>{{log.name}}</a></li>
-        </ul>
+    <div class="col-md-3" style="margin-top: 60px">
+        <div class="panel well">
+            <div class="panel-heading">
+                <h5 class="panel-title">Paramétrage</h5>
+            </div>
+            <div class="panel-body">
+                <input type="text" ng-model="query" class="form-control" placeholder="Rechercher" />
+                <p></p>
+                <button ng-click="glued = !glued" class="btn btn-default form-control" ng-show="glued">Scroll ON</button>
+                <button ng-click="glued = !glued" class="btn btn-default form-control" ng-show="!glued">Scroll Off</button>
+            </div>
+        </div>
+        <div class="panel well">
+            <div class="panel-heading">
+                <h5 class="panel-title">Logs accessible
+                </h5>
+            </div>
+            <div class="panel-body">
+                <ul class="nav nav-pills nav-stacked">
+                    <li ng-repeat="log in logs" ng-click="changeLog(log)" class="{{log.css}}"><a>{{log.name}}</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-9">
         <center><h3>Logs du serveurs</h3></center>
         <div style="overflow: auto; height: 700px;" scroll-glue ng-model="glued">
             <table class="table table-striped table-bordered"  >
-                <tr ng-repeat="log in msg track by $index"><td>{{log}}</td></tr>
+                <tr ng-repeat="log in msg | filter:query track by $index"><td>{{log}}</td></tr>
             </table>
         </div>
     </div>
