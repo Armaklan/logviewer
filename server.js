@@ -45,7 +45,7 @@ logfiles.forEach(function(log) {
 			    if (err) throw err;
 
 			    var lines = data.trim().split('\n');
-			    var lastLines = lines.slice(-100);
+			    var lastLines = lines.slice(-300);
 
 			    lastLines.forEach( function(line) {
 			    	client.emit('Log', line);

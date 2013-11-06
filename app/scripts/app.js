@@ -89,7 +89,7 @@ logApp.controller('logAppCtrl', function(LogsService, socket, $scope){
 
       $scope.sock.on('Log', function(result) {
         $scope.msg.push(result);
-        if($scope.msg.length > 100) {
+        if($scope.msg.length > 300) {
             $scope.msg.shift();
         }
       });
