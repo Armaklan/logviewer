@@ -3,6 +3,12 @@ logviewer
 
 Web based log viewer
 
+Dependencies
+-----------------------
+
+- Node.JS, Version > 0.8
+- Bower, you can install this with ```npm install -g bower```
+
 
 To install
 -----------------------
