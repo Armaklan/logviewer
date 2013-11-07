@@ -3,6 +3,8 @@ logviewer
 
 Web based log viewer
 
+![Screenshot](http://armaklan.org/pix/upload/original/1383832678.png)
+
 Dependencies
 -----------------------
 
