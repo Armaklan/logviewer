@@ -32,7 +32,10 @@ app.get('/logs.json', function(req, res){
   res.send(logfiles);
 });
 
-logfiles.forEach(function(log) {
+logfiles.forEach(function(log, index) {
+	log.css = '';
+	log.id = index;
+
 	tail[log.id] = new Tail(log.url);
 
 	app.get('/file/' + log.id, function(req, res) {
