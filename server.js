@@ -38,6 +38,12 @@ logfiles.forEach(function(log, index) {
 
 	tail[log.id] = new Tail(log.url);
 
+	tail[log.id].on('error', function(){
+	    console.log("ERROR FATAL - File " + log.url + " not found ");
+	    throw new Error("ERROR FATAL - File " + log.url + " not found ");
+	});
+
+
 	app.get('/file/' + log.id, function(req, res) {
 		var stat = fs.statSync(log.url);
 		res.writeHead(200, {
@@ -67,7 +73,6 @@ logfiles.forEach(function(log, index) {
 			});
 
 		});
-
 
 	    tail[log.id].on("line", function(data) {
 	        client.emit('Log', data);
