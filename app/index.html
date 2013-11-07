@@ -20,6 +20,7 @@
     <script src="vendor/socket.io-client/dist/socket.io.js"></script>
     <script src="scripts/app.js"></script>
     <style>
+
         .container {
             margin-top: 60px
         }
@@ -28,7 +29,26 @@
             font-family: Georgia,"Times New Roman",Times,serif;
             font-size: 1.7em;
         }
+
+        #logzone {
+            overflow: auto; 
+        }
     </style>
+    <script>
+        function height(bloc){
+            var hauteur;
+             
+            if( typeof( window.innerWidth ) == 'number' )
+                hauteur = window.innerHeight * 0.85;
+            else if( document.documentElement && document.documentElement.clientHeight )
+                hauteur = document.documentElement.clientHeight * 0.85;
+             
+            document.getElementById(bloc).style.height = hauteur+"px";
+        }
+         
+        window.onload = function(){ height("logzone")};
+        window.onresize = function(){ height("logzone")};
+    </script>
 
     <title>Log viewer</title>
 </head>
@@ -75,7 +95,7 @@
         </div>
     </div>
     <div class="col-md-9">
-        <div style="overflow: auto; height: 700px;" scroll-glue ng-model="glued">
+        <div id="logzone" scroll-glue ng-model="glued">
             <table class="table table-striped table-bordered"  >
                 <tr ng-repeat="log in msg | filter:query track by $index"><td>{{log}}</td></tr>
             </table>
