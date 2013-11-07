@@ -20,6 +20,10 @@
     <script src="vendor/socket.io-client/dist/socket.io.js"></script>
     <script src="scripts/app.js"></script>
     <style>
+        .container {
+            margin-top: 60px
+        }
+
         h3 {
             font-family: Georgia,"Times New Roman",Times,serif;
             font-size: 1.7em;
@@ -31,15 +35,15 @@
 
 <body>
 <div class="container" ng-app="logApp" ng-controller="logAppCtrl">
-    <div class="row">
-    <div class="col-md-3" style="margin-top: 60px">
+    <div class="row" style="">
+    <div class="col-md-3">
         <div class="well">
             <center>
                 <img src="img/logo.png" alt="logo" style="height: 64px">
                 <h3>Log Viewer</h3>
             </center>
         </div>
-        <div class="panel well">
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <h5 class="panel-title">Paramétrage</h5>
             </div>
@@ -54,7 +58,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel well">
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <h5 class="panel-title">Logs accessible
                 </h5>
