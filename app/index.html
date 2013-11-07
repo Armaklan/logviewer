@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" type="image/png" href="favicon.png" />
 
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/jquery/jquery-migrate.min.js"></script>
@@ -18,6 +19,12 @@
     <script src="scripts/scrollglue.js"></script>
     <script src="vendor/socket.io-client/dist/socket.io.js"></script>
     <script src="scripts/app.js"></script>
+    <style>
+        h3 {
+            font-family: Georgia,"Times New Roman",Times,serif;
+            font-size: 1.7em;
+        }
+    </style>
 
     <title>Log viewer</title>
 </head>
@@ -26,6 +33,12 @@
 <div class="container" ng-app="logApp" ng-controller="logAppCtrl">
     <div class="row">
     <div class="col-md-3" style="margin-top: 60px">
+        <div class="well">
+            <center>
+                <img src="img/logo.png" alt="logo" style="height: 64px">
+                <h3>Log Viewer</h3>
+            </center>
+        </div>
         <div class="panel well">
             <div class="panel-heading">
                 <h5 class="panel-title">Paramétrage</h5>
@@ -54,7 +67,6 @@
         </div>
     </div>
     <div class="col-md-9">
-        <center><h3>Logs du serveurs</h3></center>
         <div style="overflow: auto; height: 700px;" scroll-glue ng-model="glued">
             <table class="table table-striped table-bordered"  >
                 <tr ng-repeat="log in msg | filter:query track by $index"><td>{{log}}</td></tr>
