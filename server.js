@@ -18,6 +18,7 @@ var tail = [];
 
 var logModule = require('./conf.js');
 var logfiles = logModule.logfiles;
+var highlight = logModule.highlight;
 
 Tail = require('tail').Tail;
 
@@ -31,6 +32,17 @@ server.listen(7000);
 app.get('/logs.json', function(req, res){
   res.send(logfiles);
 });
+
+function getCss(line) {
+	var css = ""
+	highlight.forEach(function (elt){
+		if ( (css == "") && (line.toLowerCase().indexOf(elt.text.toLowerCase()) != -1)) {
+			css = "alert alert-" + elt.level;
+		}
+	});
+	return css;
+}
+
 
 logfiles.forEach(function(log, index) {
 	log.css = '';
@@ -68,14 +80,22 @@ logfiles.forEach(function(log, index) {
 			    var lastLines = lines.slice(-300);
 
 			    lastLines.forEach( function(line) {
-			    	client.emit('Log', line);
+			    	var css = getCss(line);
+			    	client.emit('Log', {
+			    		'text': line,
+			    		'css': css
+			    	});
 			    });
 			});
 
 		});
 
 	    tail[log.id].on("line", function(data) {
-	        client.emit('Log', data);
+	    	var css = getCss(line);
+	    	client.emit('Log', {
+	    		'text': line,
+	    		'css': css
+	    	});
 	    });
 
 	});

@@ -20,4 +20,25 @@ logfiles[1] = {
 	url : "c:\\developpement\\err.log"
 };
 
+
+/**
+* Level can be danger, info, warning, success
+*/
+var highlight = [];
+highlight[0] = {
+	text: "error",
+	level: "danger"
+}
+
+highlight[1] = {
+	text: "exception",
+	level: "danger"
+}
+
+highlight[2] = {
+	text: "warning",
+	level: "warning"
+}
+
 module.exports.logfiles = logfiles;
+module.exports.highlight = highlight;
